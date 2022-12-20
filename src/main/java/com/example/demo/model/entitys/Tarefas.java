@@ -1,10 +1,12 @@
 package com.example.demo.model.entitys;
 
+import com.example.demo.model.dto.TarefaDTO;
 import com.example.demo.model.services.Departamento;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -21,16 +23,23 @@ public class Tarefas {
     private final UUID uuid = UUID.randomUUID();
     private String titulo;
     private String descricao;
-    private int prazo;
+    private LocalDate prazo;
     @Enumerated(EnumType.STRING)
     private Departamento departamento;
     private Long duracao;
     private String pessoaAlocada = null;
-    private boolean finalizado;
+    private boolean finalizado = false;
 
     @ManyToOne
     @JoinColumn(name = "idpessoa")
     private Pessoa pessoa;
 
 
+    public Tarefas(TarefaDTO dados) {
+        this.titulo = dados.getTitulo();
+        this.descricao = dados.getDescricao();
+        this.prazo = dados.getPrazo();
+        this.departamento = dados.getDepartamento();
+        this.duracao = dados.getDuracao();
+    }
 }

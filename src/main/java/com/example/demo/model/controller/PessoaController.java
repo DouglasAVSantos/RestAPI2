@@ -1,5 +1,6 @@
 package com.example.demo.model.controller;
 
+import com.example.demo.model.Response.Response;
 import com.example.demo.model.Response.ResponseAlterarPessoa;
 import com.example.demo.model.dto.DadosPessoa;
 import com.example.demo.model.dto.DadosPessoaAlterar;
@@ -34,7 +35,7 @@ public class PessoaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> alterPessoa(@RequestBody DadosPessoaAlterar dados, @PathVariable("id")Long id){
+    public ResponseEntity<ResponseAlterarPessoa> alterPessoa(@RequestBody DadosPessoaAlterar dados, @PathVariable("id")Long id){
         Optional<Pessoa> p = pessoaRepository.findById(id);
         if (!p.isPresent()){
             return ResponseEntity.notFound().build();
@@ -42,5 +43,15 @@ public class PessoaController {
         p.get().atualizar(dados);
         pessoaRepository.save(p.get());
         return ResponseEntity.ok(new ResponseAlterarPessoa(p.get().getNome(),p.get().getDepartamentoEnum()));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletePessoa(@PathVariable Long id){
+        Optional<Pessoa> pessoa = pessoaRepository.findById(id);
+        if (!pessoa.isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+        pessoaRepository.deleteById(id);
+        return ResponseEntity.ok().body(new Response("Deletado"));
     }
 }

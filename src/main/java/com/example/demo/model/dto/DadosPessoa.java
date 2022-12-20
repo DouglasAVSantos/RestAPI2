@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
-
 @Getter
 public class DadosPessoa {
     @NotBlank
@@ -16,9 +15,7 @@ public class DadosPessoa {
     @NotNull @JsonProperty(value = "departamento") @Enumerated(EnumType.STRING)
     Departamento departamentoEnum;
 
-    public DadosPessoa(String nome, Departamento departamentoEnum) {
+    public DadosPessoa() {
 
-        this.nome = nome;
-        this.departamentoEnum = departamentoEnum;
     }
 }

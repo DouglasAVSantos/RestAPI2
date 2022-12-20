@@ -6,7 +6,6 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Getter;
 
-
 @Getter
 public class DadosPessoaAlterar {
     String nome;
@@ -14,11 +13,7 @@ public class DadosPessoaAlterar {
     @Enumerated(EnumType.STRING)
     Departamento departamentoEnum;
 
-    public DadosPessoaAlterar(String nome, Departamento departamentoEnum) {
-            this.nome = nome;
-            this.departamentoEnum = departamentoEnum;
-
-
+    public DadosPessoaAlterar() {
 
     }
 }
