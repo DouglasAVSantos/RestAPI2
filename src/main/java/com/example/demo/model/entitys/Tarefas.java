@@ -30,6 +30,10 @@ public class Tarefas {
     private String pessoaAlocada = null;
     private boolean finalizado = false;
 
+    public void setPessoaAlocada(String pessoaAlocada) {
+        this.pessoaAlocada = pessoaAlocada;
+    }
+
     @ManyToOne
     @JoinColumn(name = "idpessoa")
     private Pessoa pessoa;

@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -25,7 +26,8 @@ public class Pessoa {
     @Enumerated(EnumType.STRING)
     @Column(name = "departamento")
     private Departamento departamentoEnum;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa")
+    @OneToMany
+    @JoinColumn(name = "idpessoa")
     private List<Tarefas> listaDeTarefas = new java.util.ArrayList<>();
 
     public Pessoa(DadosPessoa dados) {
